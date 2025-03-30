@@ -2,22 +2,42 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
-      -- inlay_hints = {
-      --   enabled = true,
-      -- },
+      inlay_hints = {
+        enabled = true,
+      },
       -- codelens = {
       --   enabled = false,
       -- },
       diagnostics = {
-        --   -- underline = true,
+        -- -- underline = false,
         virtual_text = false,
-        --   -- float = {
-        --   --   border = "rounded",
-        --   -- },
+        float = {
+          border = "rounded",
+          format = function(diagnostic)
+            return string.format('[%s] => %s', diagnostic.source, diagnostic.message)
+          end,
+        },
       },
       servers = {
         tsp_server = {},
-        sorbet = {},
+        pylsp = {
+          settings = {
+            pylsp = {
+              configurationSources = { "flake8", "ruff", "rope_autoimport", "pylsp_mypy" },
+              plugins = {
+                rope_autoimport = { enabled = true },
+                flake8 = {
+                  enabled = true,
+                  select = 'WPS',
+                },
+                pyflakes = { enabled = false },
+                pycodestyle = { enabled = false },
+                pylsp_mypy = { enabled = true },
+              },
+            },
+          },
+        },
+        -- sorbet = {},
         -- cssls = {},
         -- https://github.com/Shopify/ruby-lsp/issues/2347
         -- ruby_lsp = {

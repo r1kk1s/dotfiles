@@ -3,9 +3,9 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "phpstan",
-        "pint",
-        "tlint",
+        "flake8",
+        "ruff",
+        "mypy",
         -- table.insert(opts.ensure_installed, "phpstan")
         -- table.insert(opts.ensure_installed, "phpcs")
         -- table.insert(opts.ensure_installed, "phpcbf")

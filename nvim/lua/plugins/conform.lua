@@ -3,11 +3,8 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        php = {
-          "pint",
-          "tlint",
-        }
-      }
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+      },
     },
   },
 }
