@@ -6,10 +6,7 @@ return {
         "flake8",
         "ruff",
         "mypy",
-        -- table.insert(opts.ensure_installed, "phpstan")
-        -- table.insert(opts.ensure_installed, "phpcs")
-        -- table.insert(opts.ensure_installed, "phpcbf")
-        -- table.insert(opts.ensure_installed, "php-cs-fixer")
+        "pyright",
       },
     },
   },

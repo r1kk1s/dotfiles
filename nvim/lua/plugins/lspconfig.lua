@@ -1,3 +1,6 @@
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -5,11 +8,7 @@ return {
       inlay_hints = {
         enabled = true,
       },
-      -- codelens = {
-      --   enabled = false,
-      -- },
       diagnostics = {
-        -- -- underline = false,
         virtual_text = false,
         float = {
           border = "rounded",
@@ -20,23 +19,46 @@ return {
       },
       servers = {
         tsp_server = {},
-        pylsp = {
+        pyright = {
           settings = {
-            pylsp = {
-              configurationSources = { "flake8", "ruff", "rope_autoimport", "pylsp_mypy" },
-              plugins = {
-                rope_autoimport = { enabled = true },
-                flake8 = {
-                  enabled = true,
-                  select = 'WPS',
-                },
-                pyflakes = { enabled = false },
-                pycodestyle = { enabled = false },
-                pylsp_mypy = { enabled = true },
-              },
-            },
+            python = {
+              analysis = {
+                typeCheckingMode = "off",
+                -- diagnosticMode = "off",
+              }
+            }
           },
+          capabilities = capabilities,
+          on_attach = function(client, bufnr)
+            require "lsp_signature".on_attach({
+              bind = true,
+              handler_opts = {
+                border = "rounded"
+              }
+            }, bufnr)
+          end,
         },
+        pylsp = {
+          enabled = false,
+          -- settings = {
+          --   pylsp = {
+          --     configurationSources = { "flake8", "ruff", "rope_autoimport", "pylsp_mypy" },
+          --     plugins = {
+          --       rope_autoimport = { enabled = true },
+          --       flake8 = { enabled = true, },
+          --       pyflakes = { enabled = false },
+          --       pycodestyle = { enabled = false },
+          --       pylsp_mypy = { enabled = true },
+          --       jedi_signature_help = { enabled = true },
+          --       jedi_completion = {
+          --           include_params = true,
+          --           fuzzy = true,
+          --       },
+          --     },
+          --   },
+          -- },
+        },
+      },
         -- sorbet = {},
         -- cssls = {},
         -- https://github.com/Shopify/ruby-lsp/issues/2347
@@ -108,5 +130,5 @@ return {
         },
       },
     },
-  },
 }
+

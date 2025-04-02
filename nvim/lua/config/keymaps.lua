@@ -23,3 +23,14 @@ bind("n", "<leader>]", "<Cmd>call append(line('.'),     repeat([''], v:count1))<
 -- vim.keymap.set('n', '<leader>fa', ':Telescope telescope-alternate alternate_file<CR>', {})
 --
 bind("n", "<leader>o", "<cmd>:Other<CR>", opts)
+
+bind('i', 'jk', '<Esc>', opts)
+
+bind({ 'n' }, '<C-k>', function()
+  require('lsp_signature').toggle_float_win()
+end, { silent = true, noremap = true, desc = 'toggle signature' })
+
+bind({ 'n' }, '<Leader>k', function()
+  vim.lsp.buf.signature_help()
+end, { silent = true, noremap = true, desc = 'toggle signature' })
+
