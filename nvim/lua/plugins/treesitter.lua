@@ -2,7 +2,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = { "lua", "python", "javascript", "typescript"},
+      ensure_installed = { "lua", "python", "javascript", "typescript", "dockerfile", "rust" },
       endwise = {
         enable = true,
       },
